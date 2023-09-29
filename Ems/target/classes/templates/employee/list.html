@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EMS</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<h1>List Employees</h1>
+<a th:href="@{/employee/showFormForAdd}" class="btn btn-primary">Add Employee</a>
+
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Employee First Name</th>
+        <th scope="col">Employee Last Name</th>
+        <th scope="col">Employee Email</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${employees.empty}">
+        <td colspan="2"> Please create a new employee </td>
+    </tr>
+    <tr th:each="employee : ${employees}" scope="row">
+        <td th:text="${employee.id}"></td>
+        <td th:text="${employee.firstName}"></td>
+        <td th:text="${employee.lastName}"></td>
+        <td th:text="${employee.email}"></td>
+        <td>
+            <a th:href="@{/employee/showFormForUpdate(employeeId=${employee.id})}" class="btn btn-primary">Update</a> |
+            <a th:href="@{/employee/deleteEmployee(employeeId=${employee.id})}" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+</body>
+</html>
